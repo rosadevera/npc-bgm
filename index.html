@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Digital Greenhouse</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="script.js"></script>
+    <style>
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+    body {
+        background-color: #4f9dff;
+        background: radial-gradient(#4f9dff 0%, #a3ccff 50%, #5391dc 100%);
+        background-repeat: no-repeat;
+        background-size: 400% 400%;
+        animation: gradient 30s ease infinite;
+        min-height: 100vh;
+        padding-top: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    </style>
+</head>
+<body>
+
+<section class="clock">
+    <img src="./media/screenshot.png">
+</section>
+    
+</body>
+</html>

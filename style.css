@@ -1,0 +1,28 @@
+*{
+    margin: 0%;
+    padding: 0px;
+    box-sizing: border-box;       
+}
+
+body {
+  background-repeat: no-repeat;
+  animation: fadeInAnimation ease 2s;
+  animation-iteration-count: 2;
+  animation-fill-mode: forwards;
+  overflow-y: hidden;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+   }
+}
+
+.clock img {
+  position: fixed;
+  top: 2vh;
+  right: 2vw;
+}
