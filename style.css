@@ -21,10 +21,27 @@ body {
    }
 }
 
-.clock img {
+.clock {
   position: fixed;
   top: 2vh;
   right: 2vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.date {
+  position: absolute;
+  top: 28px;
+  left: 55px;
+  letter-spacing: 0.25rem;
+}
+
+.time {
+  position: absolute;
+  top: 72px;
+  left: 55px;
+  letter-spacing: 1.85rem;
 }
 
 header {

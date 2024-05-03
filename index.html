@@ -4,11 +4,16 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta charset="utf-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Digital Greenhouse</title>
+    <title>npc bgm</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="script.js"></script>
+    <script defer src="script.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/p5@1.9.3/lib/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/{version}/p5.js"></script> -->
     <style>
         @keyframes gradient {
             0% {
@@ -39,10 +44,21 @@
 </head>
 <body>
 
+    <audio id="audio" controls style="display: none;">
+        <source src="./audio/00/0.mp3" type="audio/mpeg">
+    </audio>
+
 <section class="clock">
-    <img src="./media/screenshot.png">
+    <img src="./media/clock.png" width="230px">
+    <div class="date">
+        01 23
+    </div>
+    <div class="time">
+        0 1 2 3
+    </div>
 </section>
 
-    
+<script src="p5.js"></script>
+
 </body>
 </html>
