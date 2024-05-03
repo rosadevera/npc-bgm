@@ -11,13 +11,15 @@ function getCurrentHourFolder() {
     return hour.toString().padStart(2, '0');
 }
 
-// Function to play a random audio file within the folder
 function playRandomAudio(folder) {
     // Generate a random number to select the audio file
-    let randomIndex = Math.floor(Math.random() * 2); // Assuming there are 2 audio files per folder
+    let randomIndex = Math.floor(Math.random() * 6); // Assuming there are 6 audio files per folder
 
     // Construct the path to the randomly selected audio file
     let audioPath = `./audio/${folder}/${randomIndex}.mp3`;
+
+    // Log the filename
+    console.log(`Playing: ${audioPath}`);
 
     // Set the source of the audio element
     audioElement.src = audioPath;
