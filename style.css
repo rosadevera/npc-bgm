@@ -4,45 +4,235 @@
     box-sizing: border-box;       
 }
 
-body {
-  background-repeat: no-repeat;
-  animation: fadeInAnimation ease 2s;
-  animation-iteration-count: 2;
-  animation-fill-mode: forwards;
-  overflow-y: hidden;
+@font-face {
+  font-family: Humming;
+  src: url(./humming.otf);
 }
 
-@keyframes fadeInAnimation {
+@keyframes gradient {
   0% {
-      opacity: 0;
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
   }
   100% {
-      opacity: 1;
-   }
+      background-position: 0% 50%;
+  }
+}
+
+body {
+  background: radial-gradient(#4f9dff 0%, #a3ccff 50%, #5391dc 100%);
+  background-repeat: no-repeat;
+  background-size: 400% 400%;
+  animation: gradient 30s ease infinite;
+  min-height: 100vh;
+  overflow-y: hidden;
 }
 
 .clock {
   position: fixed;
   top: 2vh;
   right: 2vw;
-  font-family: "Quicksand", sans-serif;
-  font-weight: bold;
-  font-size: 1.5rem;
+  font-family: "Humming";
+  color: #3a331f;
+  font-weight: 600;
+  z-index: 999;
+}
+
+.month {
+  position: absolute;
+  top: 22px;
+  left: 98px;
+  font-size: 1rem;
+  letter-spacing: 1.35rem;
 }
 
 .date {
   position: absolute;
-  top: 28px;
-  left: 55px;
-  letter-spacing: 0.25rem;
+  top: 22px;
+  left: 181px;
+  font-size: 1rem;
+  letter-spacing: 1.35rem;
 }
 
-.time {
+.hour {
   position: absolute;
-  top: 72px;
-  left: 55px;
-  letter-spacing: 1.85rem;
+  top: 67px;
+  left: 28px;
+  font-size: 1.5rem;
+  letter-spacing: 2rem;
 }
 
-header {
+.minute {
+  position: absolute;
+  top: 67px;
+  left: 139px;
+  font-size: 1.5rem;
+  letter-spacing: 2.1rem;
+}
+
+.ampm {
+  position: absolute;
+  top: 80px;
+  left: 233px;
+  font-size: .8rem;
+}
+
+.leaflogo {
+  position: absolute;
+  top: 17px;
+  left: 43px;
+  transition: ease-in-out .15s;
+}
+
+.leaflogo:hover {
+  transform:scale(1.07);
+  cursor: pointer;
+}
+
+@keyframes moveText {
+  0% {
+    transform: translateX(0);
+    opacity: 0; /* Start with opacity set to 0 */
+  }
+  3% {
+    opacity: 1; /* Fade in during the first half of the animation */
+  }
+  100% {
+    transform: translateX(100vw);
+    opacity: 1; /* Keep opacity at 1 for the second half */
+  }
+}
+
+.all {
+  position: fixed;
+  top:0;
+  height: 100vh;
+  width: 100vw;
+  /* border: 1px solid black; */
+}
+
+.moving-text {
+  margin-top: 10vh;
+  white-space: nowrap; /* Prevents text from wrapping to the next line */
+  animation: moveText 90s linear infinite; /* Adjust the duration and other properties as needed */
+  opacity: 0;
+}
+
+.text3 {
+  position: absolute;
+  top: 350px;
+}
+
+.text7 {
+  position: absolute;
+  top: -100px;
+  animation-delay: 15s; /* Delay the third text by 2 seconds */
+}
+
+.text8 {
+  position: absolute;
+  top: -100px;
+  animation-delay: 30s; /* Delay the third text by 2 seconds */
+}
+
+.task {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+}
+
+input[type="text"] {
+  border: none;
+  width: 225px;
+  outline: none; 
+  background: none;
+  font-family: "Humming";
+  font-size: 1rem;
+  word-wrap: break-word;
+  white-space: normal;
+  margin-bottom: 10px;
+  color: #3a331f;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  transition: background-color ease-in-out 0.15s; /* Add transition effect */
+}
+
+/* Style the checkmark */
+input[type="checkbox"]:checked::before {
+  content: "\2713"; /* Checkmark symbol */
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 20px;
+  color: #fff9f7; /* Checkmark color */
+  background-color: #3a331f; /* Background color when checked */
+}
+
+label {
+  vertical-align: middle;
+}
+
+
+.todo {
+  position: relative;
+  transition: transform 0.3s;
+  transform: translate(-100%, 0);
+  top: 20px;
+  width: 250px;
+  height: fit-content;
+  background: #fff9f7;
+  border-bottom-right-radius: 20px;
+  padding: 15px;
+}
+
+
+.todo button {
+	background: #fff9f7;
+  font-size: 1.5rem;
+	padding: 0.5rem 1rem;
+  color: #3a331f;
+  border: none;
+	border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+	position: absolute;
+	top: 0px;
+	left: 245px;
+	cursor: pointer;
+}
+
+.expanded {
+	transform: translate(0, 0);
+}
+
+.todo h1 {
+  font-family: "Humming";
+  font-size: 1rem;
+  color: #3a331f;
+}
+
+ul {
+  list-style-type: none;
+  font-family: "Humming";
+  font-size: .8rem;
+  color: #3a331f;
+}
+
+.about {
+  
 }
