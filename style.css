@@ -100,7 +100,7 @@ body {
   }
 }
 
-.all {
+.sky {
   position: fixed;
   top:0;
   height: 100vh;
@@ -244,9 +244,19 @@ ul {
   /* border: 2px red solid; */
 }
 
+.about a {
+  text-decoration: none;
+  font-family: "Humming";
+  color: #d475a8;
+}
+
+.about:hover {
+  cursor: pointer;
+}
+
 .text {
   position: absolute;
-  left: 75px;
+  left: 79px;
   top: 260px;
   width: 440px;
   /* border: 2px red solid; */
@@ -269,21 +279,6 @@ ul {
 100% {
     opacity: 1;
 }
-}
-
-.close-button {
-  color: white;
-  position: absolute;
-  top: 200px;
-  right: 20px;
-  animation: none;
-  font-family: "Humming";
-  font-size: 2rem;
-  border: none;
-  font-style: normal;
-  cursor: pointer;
-  z-index: 999;
-  background-color: transparent;
 }
 
 .question {

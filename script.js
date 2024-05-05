@@ -158,13 +158,73 @@ expandBtn.addEventListener("click", function (event) {
 document.addEventListener('DOMContentLoaded', function() {
   const questionButton = document.getElementById('questionButton');
   const aboutSection = document.getElementById('aboutSection');
-  const closeButton = document.getElementById('closeButton');
 
   questionButton.addEventListener('click', function() {
       aboutSection.style.display = 'block';
   });
+});
 
-  closeButton.addEventListener('click', function() {
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Typewriter sound effect
+  const typewriterSound = new Audio('./audio/dialogue.mp3');
+  typewriterSound.preload = 'auto'; // Preload the audio file
+  typewriterSound.load(); // Load the audio file
+
+  typewriterSound.oncanplaythrough = function() {
+    // The audio is loaded and ready to play
+    console.log("Typewriter sound loaded and ready to play.");
+  };
+
+  const aboutSection = document.getElementById('aboutSection');
+  const textElement = aboutSection.querySelector('p');
+  const initialTextContent = 'This site is a live clock created by Rosa de Vera that syncs up to hourly tunes from various Animal Crossing games.';
+  const newTextContent = "Containing a to-do list feature, I hope this site provides cozy bgm and ambience to study, work, or simply relax to!";
+  let typingSpeed = 18; // Adjust typing speed here
+  let typingTimeout; // Variable to hold the typing setTimeout
+  let isInitialText = true;
+
+  function typeWriter(textContent) {
+    let i = 0;
+
+    // Play typewriter sound at the beginning of typing
+    typewriterSound.currentTime = 0; // Reset audio to start position
+    typewriterSound.play();
+
+    clearText(); // Ensure text is cleared before typing
+
+    function type() {
+      if (i < textContent.length) {
+        const char = textContent.charAt(i);
+        textElement.innerHTML += char; // Use innerHTML to render HTML tags
+        i++;
+        typingTimeout = setTimeout(type, typingSpeed);
+      }
+    }
+    type();
+  }
+
+  function clearText() {
+    textElement.innerHTML = '';
+  }
+
+  const questionButton = document.getElementById('questionButton');
+  questionButton.addEventListener('click', function() {
+    aboutSection.style.display = 'block';
+    isInitialText = true;
+    clearTimeout(typingTimeout); // Clear any existing typing timeouts
+    typeWriter(initialTextContent);
+  });
+
+  aboutSection.addEventListener('click', function() {
+    if (isInitialText) {
+      clearTimeout(typingTimeout); // Stop the typing animation
+      typeWriter(newTextContent);
+      isInitialText = false;
+    } else {
       aboutSection.style.display = 'none';
+      clearText();
+      isInitialText = true;
+    }
   });
 });
