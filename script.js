@@ -154,3 +154,18 @@ let sidebar = document.getElementById("sidebar");
 expandBtn.addEventListener("click", function (event) {
 	sidebar.classList.toggle("expanded");
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const leafLogo = document.getElementById('leafLogo');
+  const aboutSection = document.getElementById('aboutSection');
+  const closeButton = document.getElementById('closeButton');
+
+  leafLogo.addEventListener('click', function() {
+      aboutSection.style.display = 'block';
+  });
+
+  closeButton.addEventListener('click', function() {
+      aboutSection.style.display = 'none';
+  });
+});

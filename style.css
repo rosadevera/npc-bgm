@@ -37,7 +37,7 @@ body {
   font-family: "Humming";
   color: #3a331f;
   font-weight: 600;
-  z-index: 999;
+  z-index: 998;
 }
 
 .month {
@@ -234,5 +234,59 @@ ul {
 }
 
 .about {
-  
+  display: none;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  align-content: center;
+  text-align: center;
+  width: fit-content;
+  height: fit-content;
+  z-index: 999;
+  animation: opacity .25s ease-in-out;
+  font-family: "Humming";
+  color: #fff9f7;
+  /* border: 2px red solid; */
+}
+
+.text {
+  position: absolute;
+  left: 75px;
+  top: 260px;
+  width: 440px;
+  /* border: 2px red solid; */
+}
+
+.text p{
+  text-align: left;
+  font-family: "Humming";
+  color: #fff9f7;
+  opacity: 90%;
+  font-size: 1.15rem;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+}
+100% {
+    opacity: 1;
+}
+}
+
+.close-button {
+  color: white;
+  position: absolute;
+  top: 200px;
+  right: 20px;
+  animation: none;
+  font-family: "Humming";
+  font-size: 2rem;
+  border: none;
+  font-style: normal;
+  cursor: pointer;
+  z-index: 999;
+  background-color: transparent;
 }
