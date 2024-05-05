@@ -86,11 +86,6 @@ body {
   transition: ease-in-out .15s;
 }
 
-.leaflogo:hover {
-  transform:scale(1.07);
-  cursor: pointer;
-}
-
 @keyframes moveText {
   0% {
     transform: translateX(0);
@@ -289,4 +284,18 @@ ul {
   cursor: pointer;
   z-index: 999;
   background-color: transparent;
+}
+
+.question {
+  position: fixed;
+  bottom: 15px;
+  right: 35px;
+  font-family: "Humming";
+  font-size: 1.25rem;
+  color: white;
+}
+
+.question:hover {
+  transform:scale(1.07);
+  cursor: pointer;
 }

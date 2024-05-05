@@ -11,22 +11,29 @@ function getCurrentHourFolder() {
     return hour.toString().padStart(2, '0');
 }
 
+// Function to play random audio files within the hour folder
 function playRandomAudio(folder) {
-    // Generate a random number to select the audio file
-    let randomIndex = Math.floor(Math.random() * 6); // Assuming there are 6 audio files per folder
+  // Generate a random number to select the audio file
+  let randomIndex = Math.floor(Math.random() * 6); // Assuming there are 6 audio files per folder
 
-    // Construct the path to the randomly selected audio file
-    let audioPath = `./audio/${folder}/${randomIndex}.mp3`;
+  // Construct the path to the randomly selected audio file
+  let audioPath = `./audio/${folder}/${randomIndex}.mp3`;
 
-    // Log the filename
-    console.log(`Playing: ${audioPath}`);
+  // Log the filename
+  console.log(`Playing: ${audioPath}`);
 
-    // Set the source of the audio element
-    audioElement.src = audioPath;
+  // Set the source of the audio element
+  audioElement.src = audioPath;
 
-    // Play the audio
-    audioElement.play();
+  // Play the audio
+  audioElement.play();
 }
+
+// Listen for the 'ended' event on the audio element
+audioElement.addEventListener('ended', function() {
+    // Play the next audio file after the current one ends
+    playRandomAudio(folder);
+});
 
 // Function to update date and time
 function updateDateTime() {
@@ -66,13 +73,6 @@ updateDateTime();
 // Call updateDateTime() every second
 setInterval(updateDateTime, 1000);
 
-// Continuously play random audio files within the hour folder
-setInterval(function() {
-    let folder = getCurrentHourFolder();
-    playRandomAudio(folder);
-}, 60000); // Repeat every minute
-
-
 function setBackgroundGradient() {
     let now = new Date();
     let hour = now.getHours();
@@ -94,12 +94,11 @@ function setBackgroundGradient() {
     }
   
     document.body.style.backgroundImage = `radial-gradient(${gradientColors})`;
-  }
+}
 
-  setInterval(updateDateTime, 1000);
-  setBackgroundGradient();    
+setBackgroundGradient();    
 
-  // Get the input field
+// Get the input field
 const taskInput = document.querySelector('.task-input');
 const todosList = document.getElementById('todos');
 
@@ -157,11 +156,11 @@ expandBtn.addEventListener("click", function (event) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-  const leafLogo = document.getElementById('leafLogo');
+  const questionButton = document.getElementById('questionButton');
   const aboutSection = document.getElementById('aboutSection');
   const closeButton = document.getElementById('closeButton');
 
-  leafLogo.addEventListener('click', function() {
+  questionButton.addEventListener('click', function() {
       aboutSection.style.display = 'block';
   });
 
