@@ -86,16 +86,16 @@ body {
   transition: ease-in-out .15s;
 }
 
-@keyframes moveText {
+@keyframes moveCloud {
   0% {
-    transform: translateX(0);
+    margin-left: -500px;
     opacity: 0; /* Start with opacity set to 0 */
   }
   3% {
     opacity: 1; /* Fade in during the first half of the animation */
   }
   100% {
-    transform: translateX(100vw);
+    margin-left: 100%;
     opacity: 1; /* Keep opacity at 1 for the second half */
   }
 }
@@ -105,37 +105,46 @@ body {
   top:0;
   height: 100vh;
   width: 100vw;
+}
+
+.moving-cloud {
+  white-space: nowrap; 
+  opacity: 0;
   /* border: 1px solid black; */
 }
 
-.moving-text {
-  margin-top: 10vh;
-  white-space: nowrap; /* Prevents text from wrapping to the next line */
-  animation: moveText 90s linear infinite; /* Adjust the duration and other properties as needed */
-  opacity: 0;
+.cloud1 {
+  position: absolute;
+  bottom: -300px;
+  animation: moveCloud 240s linear infinite; 
+  animation-delay: 50s;
 }
 
-.text3 {
+.cloud2 {
+  position: absolute;
+  top: -300px;
+  animation: moveCloud 360s linear infinite; 
+  animation-delay: 30s;
+}
+
+.cloud3 {
   position: absolute;
   top: 350px;
+  animation: moveCloud 280s linear infinite; 
+  animation-delay: 120s;
 }
 
-.text7 {
+.cloud4 {
   position: absolute;
-  top: -100px;
-  animation-delay: 15s; /* Delay the third text by 2 seconds */
+  top: 100px;
+  animation: moveCloud 300s linear infinite; 
 }
 
-.text8 {
-  position: absolute;
-  top: -100px;
-  animation-delay: 30s; /* Delay the third text by 2 seconds */
-}
-
-.task {
+.rainbow {
   position: fixed;
-  top: 30px;
-  left: 30px;
+  visibility: hidden;
+  top: 200px;
+  left: 150px;
 }
 
 input[type="text"] {
@@ -185,7 +194,7 @@ label {
 
 
 .todo {
-  position: relative;
+  position: fixed;
   transition: transform 0.3s;
   transform: translate(-100%, 0);
   top: 20px;
@@ -194,6 +203,7 @@ label {
   background: #fff9f7;
   border-bottom-right-radius: 20px;
   padding: 15px;
+  z-index: 998;
 }
 
 
@@ -244,6 +254,10 @@ ul {
   /* border: 2px red solid; */
 }
 
+.about img {
+  width: 500px;
+}
+
 .about a {
   text-decoration: none;
   font-family: "Humming";
@@ -256,9 +270,9 @@ ul {
 
 .text {
   position: absolute;
-  left: 79px;
-  top: 260px;
-  width: 440px;
+  left: 72px;
+  top: 213px;
+  width: 350px;
   /* border: 2px red solid; */
 }
 
@@ -267,7 +281,7 @@ ul {
   font-family: "Humming";
   color: #fff9f7;
   opacity: 90%;
-  font-size: 1.15rem;
+  font-size: 1rem;
   word-wrap: break-word;
   white-space: normal;
 }
@@ -287,10 +301,40 @@ ul {
   right: 35px;
   font-family: "Humming";
   font-size: 1.25rem;
-  color: white;
+  color: #fff9f7;
 }
 
 .question:hover {
   transform:scale(1.07);
   cursor: pointer;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .todo {
+    top: 200px;
+  }
+
+  .about {
+    /* Center horizontally */
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .about img {
+    width: 390px;
+  }
+  
+  .text {
+    left: 57px;
+    top: 167px;
+    width: 270px;
+  }
+  
+  .text p{
+    font-size: .75rem;
+  }
 }

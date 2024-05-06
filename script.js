@@ -74,29 +74,34 @@ updateDateTime();
 setInterval(updateDateTime, 1000);
 
 function setBackgroundGradient() {
-    let now = new Date();
-    let hour = now.getHours();
-  
-    let gradientColors;
-  
-    if (hour >= 5 && hour < 6) {
-      // Sunrise gradient
-      gradientColors = "#4e6799 0%, #6096b3 50%, #e0c4af 100%";
-    } else if (hour >= 7 && hour < 17) {
-      // Morning/afternoon gradient
-      gradientColors = "#4f9dff 0%, #a3ccff 50%, #5391dc 100%";
-    } else if (hour >= 17 && hour < 19) {
-      // Sunset gradient
-      gradientColors = "#6096b3 0%, #4e6799 50%, #766fa1 100%";
-    } else {
-      // Night gradient
-      gradientColors = "#111724 0%, #1e1f2b 50%, #151617 100%";
-    }
-  
-    document.body.style.backgroundImage = `radial-gradient(${gradientColors})`;
+  let now = new Date();
+  let hour = now.getHours();
+
+  let gradientColors;
+
+  if (hour >= 5 && hour < 6) {
+    // Sunrise gradient
+    gradientColors = "#4e6799 0%, #6096b3 50%, #e0c4af 100%";
+    document.querySelector('.sky').style.filter = 'blur(2px) opacity(50%)';
+  } else if (hour >= 7 && hour < 17) {
+    // Morning/afternoon gradient
+    gradientColors = "#4f9dff 0%, #a3ccff 50%, #5391dc 100%";
+    document.querySelector('.rainbow').style.visibility = 'visible'; // Show rainbow
+  } else if (hour >= 17 && hour < 19) {
+    // Sunset gradient
+    gradientColors = "#6096b3 0%, #4e6799 50%, #766fa1 100%";
+    document.querySelector('.sky').style.filter = 'blur(2px) opacity(50%)';
+  } else {
+    // Night gradient
+    gradientColors = "#131421 0%, #111724 50%, #070708 100%";
+    document.querySelector('.sky').style.filter = 'blur(5px) opacity(10%)';
 }
 
-setBackgroundGradient();    
+  document.body.style.backgroundImage = `radial-gradient(${gradientColors})`;
+}
+
+setBackgroundGradient();
+
 
 // Get the input field
 const taskInput = document.querySelector('.task-input');
@@ -179,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const aboutSection = document.getElementById('aboutSection');
   const textElement = aboutSection.querySelector('p');
   const initialTextContent = 'This site is a live clock created by Rosa de Vera that syncs up to hourly tunes from various Animal Crossing games.';
-  const newTextContent = "Containing a to-do list feature, I hope this site provides cozy bgm and ambience to study, work, or simply relax to!";
+  const newTextContent = "With a to-do list feature, I hope this site provides cozy bgm and ambience to study, work, or simply relax to!";
   let typingSpeed = 18; // Adjust typing speed here
   let typingTimeout; // Variable to hold the typing setTimeout
   let isInitialText = true;
