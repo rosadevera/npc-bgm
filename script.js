@@ -1,42 +1,40 @@
-// Get the audio element
-let audioElement = document.getElementById('audio');
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the audio element
+  const audioElement = document.getElementById('audio');
 
-// Define the folder based on the current hour
-let folder = getCurrentHourFolder();
-playRandomAudio(folder);
-
-// Function to get the folder corresponding to the current hour
-function getCurrentHourFolder() {
+  // Function to define the folder based on the current hour
+  function getCurrentHourFolder() {
     let hour = new Date().getHours();
     return hour.toString().padStart(2, '0');
-}
+  }
 
-// Function to play random audio files within the hour folder
-function playRandomAudio(folder) {
-  // Generate a random number to select the audio file
-  let randomIndex = Math.floor(Math.random() * 6); // Assuming there are 6 audio files per folder
+  // Function to play random audio files within the hour folder
+  function playRandomAudio(folder) {
+    // Generate a random number to select the audio file
+    let randomIndex = Math.floor(Math.random() * 6); // Assuming there are 6 audio files per folder
 
-  // Construct the path to the randomly selected audio file
-  let audioPath = `./audio/${folder}/${randomIndex}.mp3`;
+    // Construct the path to the randomly selected audio file
+    let audioPath = `./audio/${folder}/${randomIndex}.mp3`;
 
-  // Log the filename
-  console.log(`Playing: ${audioPath}`);
+    // Log the filename
+    console.log(`Playing: ${audioPath}`);
 
-  // Set the source of the audio element
-  audioElement.src = audioPath;
+    // Set the source of the audio element
+    audioElement.src = audioPath;
 
-  // Play the audio
-  audioElement.play();
-}
+    // Play the audio
+    audioElement.play();
+  }
 
-// Listen for the 'ended' event on the audio element
-audioElement.addEventListener('ended', function() {
+  // Listen for the 'ended' event on the audio element
+  audioElement.addEventListener('ended', function() {
     // Play the next audio file after the current one ends
+    let folder = getCurrentHourFolder();
     playRandomAudio(folder);
-});
+  });
 
-// Function to update date and time
-function updateDateTime() {
+  // Function to update date and time
+  function updateDateTime() {
     let now = new Date();
     let monthDiv = document.querySelector('.month');
     let dateDiv = document.querySelector('.date');
@@ -66,97 +64,124 @@ function updateDateTime() {
 
     // Update AM/PM
     ampmDiv.textContent = ampm;
-}
 
-updateDateTime();
+    // Update background gradient based on current hour
+    setBackgroundGradient();
+  }
 
-// Call updateDateTime() every second
-setInterval(updateDateTime, 1000);
+  updateDateTime();
 
-function setBackgroundGradient() {
-  let now = new Date();
-  let hour = now.getHours();
+  // Call updateDateTime() every minute to update the time and background gradient
+  setInterval(updateDateTime, 1000); // Every second 1000 milliseconds)
 
-  let gradientColors;
-
-  if (hour >= 5 && hour < 6) {
-    // Sunrise gradient
-    gradientColors = "#4e6799 0%, #6096b3 50%, #e0c4af 100%";
-    document.querySelector('.sky').style.filter = 'blur(2px) opacity(50%)';
-  } else if (hour >= 7 && hour < 17) {
-    // Morning/afternoon gradient
-    gradientColors = "#4f9dff 0%, #a3ccff 50%, #5391dc 100%";
-    document.querySelector('.rainbow').style.visibility = 'visible'; // Show rainbow
-  } else if (hour >= 17 && hour < 19) {
-    // Sunset gradient
-    gradientColors = "#6096b3 0%, #4e6799 50%, #766fa1 100%";
-    document.querySelector('.sky').style.filter = 'blur(2px) opacity(50%)';
-  } else {
-    // Night gradient
-    gradientColors = "#131421 0%, #111724 50%, #070708 100%";
-    document.querySelector('.sky').style.filter = 'blur(5px) opacity(10%)';
-}
-
-  document.body.style.backgroundImage = `radial-gradient(${gradientColors})`;
-}
-
-setBackgroundGradient();
-
-
-// Get the input field
-const taskInput = document.querySelector('.task-input');
-const todosList = document.getElementById('todos');
-
-// Event listener for the input field
-taskInput.addEventListener('keypress', function(event) {
-    if (event.key === 'Enter') {
-        const taskText = taskInput.value.trim();
-        if (taskText !== '') {
-            addTask(taskText); // Add the task to the list
-            taskInput.value = ''; // Clear the input field
-        }
+  // Function to set background gradient
+  function setBackgroundGradient() {
+    let now = new Date();
+    let hour = now.getHours();
+    let gradientColors;
+    let skyElement = document.querySelector('.sky');
+  
+    if (hour >= 5 && hour < 6) {
+      // Sunrise gradient
+      gradientColors = "#4e6799 0%, #6096b3 50%, #e0c4af 100%";
+      skyElement.style.filter = 'blur(2px) opacity(50%)';
+    } else if (hour >= 7 && hour < 17) {
+      // Morning/afternoon gradient
+      gradientColors = "#4f9dff 0%, #a3ccff 50%, #5391dc 100%";
+      skyElement.style.filter = 'blur(2px) opacity(50%)';
+    } else if (hour >= 17 && hour < 19) {
+      // Sunset gradient
+      gradientColors = "#6096b3 0%, #4e6799 50%, #766fa1 100%";
+      skyElement.style.filter = 'blur(2px) opacity(50%)';
+    } else {
+      // Night gradient
+      gradientColors = "#131421 0%, #111724 50%, #070708 100%";
+      skyElement.style.filter = 'blur(5px) opacity(10%)';
     }
-});
+  
+    // Apply gradient colors with transition effect
+    skyElement.style.transition = 'background-image 1s ease-in-out';
+    document.body.style.backgroundImage = `radial-gradient(${gradientColors})`;
+  }  
 
-// Function to add a new task
-function addTask(taskText) {
-  // Create a new <li> element
-  const li = document.createElement('li');
+  setBackgroundGradient();
 
-  // Create checkbox
-  const checkbox = document.createElement('input');
-  checkbox.type = 'checkbox';
+  // Get the input field
+  const taskInput = document.querySelector('.task-input');
+  const todosList = document.getElementById('todos');
 
-  // Create label for the task
-  const label = document.createElement('label');
-  label.textContent = taskText;
-
-  // Append checkbox and label to the <li> element
-  li.appendChild(checkbox);
-  li.appendChild(label);
-
-  // Add the new <li> element to the <ul>
-  todosList.appendChild(li);
-
-  // Add event listener to checkbox
-  checkbox.addEventListener('change', function() {
-      if (this.checked) {
-          // If checkbox is checked, add styles for completed task
-          label.style.textDecoration = 'line-through';
-          label.style.color = 'gray';
-      } else {
-          // If checkbox is unchecked, remove styles for completed task
-          label.style.textDecoration = 'none';
-          label.style.color = '#3a331f'; // Reset to default color
+  // Event listener for the input field
+  taskInput.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        addTask(taskText); // Add the task to the list
+        taskInput.value = ''; // Clear the input field
       }
+    }
   });
-}
 
-let expandBtn = document.getElementById("expand");
-let sidebar = document.getElementById("sidebar");
+  // Function to add a new task
+  function addTask(taskText) {
+    // Create a new <li> element
+    const li = document.createElement('li');
 
-expandBtn.addEventListener("click", function (event) {
-	sidebar.classList.toggle("expanded");
+    // Create checkbox
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+
+    // Create label for the task
+    const label = document.createElement('label');
+    label.textContent = taskText;
+
+    // Append checkbox and label to the <li> element
+    li.appendChild(checkbox);
+    li.appendChild(label);
+
+    // Add the new <li> element to the <ul>
+    todosList.appendChild(li);
+
+    // Add event listener to checkbox
+    checkbox.addEventListener('change', function() {
+      if (this.checked) {
+        // If checkbox is checked, add styles for completed task
+        label.style.textDecoration = 'line-through';
+        label.style.color = 'gray';
+      } else {
+        // If checkbox is unchecked, remove styles for completed task
+        label.style.textDecoration = 'none';
+        label.style.color = '#3a331f'; // Reset to default color
+      }
+    });
+  }
+
+  let expandBtn = document.getElementById("expand");
+  let sidebar = document.getElementById("sidebar");
+
+  expandBtn.addEventListener("click", function(event) {
+    sidebar.classList.toggle("expanded");
+  });
+
+  // Fade out the landing section and start playing music when playButton is clicked
+  const playButton = document.getElementById('playButton');
+  playButton.addEventListener('click', function() {
+    const landingSection = document.querySelector('.landing');
+    // Fade out the landing section
+    landingSection.style.transition = 'opacity 1s ease-in-out';
+    landingSection.style.opacity = '0';
+
+    // Once the fading animation is complete
+    setTimeout(function() {
+      // Hide the landing section
+      landingSection.style.display = 'none';
+
+      // Start playing the music
+      let folder = getCurrentHourFolder();
+      playRandomAudio(folder);
+    }, 1000); // Adjust the timeout to match the duration of the fading animation
+  });
+
+  // Continue with your other event listeners and functions as before
 });
 
 
@@ -232,4 +257,34 @@ document.addEventListener('DOMContentLoaded', function() {
       isInitialText = true;
     }
   });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Function to type out text content
+  function typeWriter(element, textContent, typingSpeed) {
+    let i = 0;
+    const typingInterval = setInterval(function() {
+      if (i < textContent.length) {
+        element.textContent += textContent.charAt(i);
+        i++;
+      } else {
+        clearInterval(typingInterval); // Stop typing when all characters are typed out
+      }
+    }, typingSpeed);
+  }
+
+  // Get the title section and the <h1> element
+  const titleSection = document.querySelector('.title');
+  const headingElement = titleSection.querySelector('h1');
+  const initialTextContent = headingElement.textContent; // Get the initial text content of the heading
+  const typingSpeed = 100; // Adjust typing speed here
+
+  // Set the initial height of the landing section
+  titleSection.style.height = titleSection.offsetHeight + 'px';
+
+  // Clear the existing text content of the heading
+  headingElement.textContent = '';
+
+  // Call the typeWriter function with the <h1> element, the initial text content, and the desired typing speed
+  typeWriter(headingElement, initialTextContent, typingSpeed);
 });

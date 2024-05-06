@@ -37,7 +37,7 @@ body {
   font-family: "Humming";
   color: #3a331f;
   font-weight: 600;
-  z-index: 998;
+  z-index: 997;
 }
 
 .month {
@@ -143,8 +143,10 @@ body {
 .rainbow {
   position: fixed;
   visibility: hidden;
-  top: 200px;
+  top: 400px;
   left: 150px;
+  height: 250px;
+  width: auto;
 }
 
 input[type="text"] {
@@ -203,7 +205,7 @@ label {
   background: #fff9f7;
   border-bottom-right-radius: 20px;
   padding: 15px;
-  z-index: 998;
+  z-index: 997;
 }
 
 
@@ -247,7 +249,7 @@ ul {
   text-align: center;
   width: fit-content;
   height: fit-content;
-  z-index: 999;
+  z-index: 998;
   animation: opacity .25s ease-in-out;
   font-family: "Humming";
   color: #fff9f7;
@@ -302,11 +304,49 @@ ul {
   font-family: "Humming";
   font-size: 1.25rem;
   color: #fff9f7;
+  transition: ease-in-out .25s;
 }
 
 .question:hover {
-  transform:scale(1.07);
+  transform:scale(1.15);
+  filter: drop-shadow(0px 0px 5px #fff9f7);
   cursor: pointer;
+}
+
+.landing {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(159, 159, 159, 0.223);
+  backdrop-filter: blur(20px);
+  z-index: 999;
+  /* animation: opacity 1s ease-in-out; */
+
+  font-family: "Humming";
+  font-size: 1rem;
+  color: #fff9f7;
+}
+
+.maple {
+  margin-bottom: 10px;
+}
+
+.play {
+  margin-top: 25px;
+}
+
+.play img {
+  transition: ease-in-out .25s;
+}
+
+.play img:hover{
+  transform:scale(1.05);
+  cursor: pointer;
+  filter: drop-shadow(0px 0px 5px #fff9f7);
 }
 
 
@@ -336,5 +376,11 @@ ul {
   
   .text p{
     font-size: .75rem;
+  }
+
+  .rainbow {
+    top: 400px;
+    left: 150px;
+    height: 100px;
   }
 }
