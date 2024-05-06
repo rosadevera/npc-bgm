@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Get the audio element
   const audioElement = document.getElementById('audio');
 
+  audioElement.volume = 0.4;
+
   // Function to define the folder based on the current hour
   function getCurrentHourFolder() {
     let hour = new Date().getHours();
