@@ -107,7 +107,7 @@ function setBackgroundGradient() {
   let newGradient = `radial-gradient(${gradientColors})`;
   
   // Update the background gradient gradually
-  let steps = 20; // Adjust the number of steps for smoother transition
+  let steps = 100; // Adjust the number of steps for smoother transition
   let currentStep = 0;
   let interval = setInterval(function() {
     currentStep++;
