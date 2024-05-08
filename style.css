@@ -28,6 +28,7 @@ body {
   animation: gradient 30s ease infinite;
   min-height: 100vh;
   overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .clock {
@@ -143,7 +144,7 @@ body {
 .rainbow {
   position: fixed;
   visibility: hidden;
-  top: 400px;
+  top: 200px;
   left: 150px;
   height: 250px;
   width: auto;
@@ -350,6 +351,11 @@ ul {
 
 
 @media only screen and (max-width: 600px) {
+  body {
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+  
   .todo {
     top: 200px;
   }
@@ -379,7 +385,6 @@ ul {
 
   .rainbow {
     top: 400px;
-    left: 150px;
-    height: 100px;
+    left: 50px;
   }
 }

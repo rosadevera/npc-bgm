@@ -77,34 +77,49 @@ document.addEventListener('DOMContentLoaded', function() {
   setInterval(updateDateTime, 1000); // Every second 1000 milliseconds)
 
   // Function to set background gradient
-  function setBackgroundGradient() {
-    let now = new Date();
-    let hour = now.getHours();
-    let gradientColors;
-    let skyElement = document.querySelector('.sky');
+function setBackgroundGradient() {
+  let now = new Date();
+  let hour = now.getHours();
+  let gradientColors;
+  let skyElement = document.querySelector('.sky');
+  let currentGradient = skyElement.style.backgroundImage;
+
+  if (hour >= 5 && hour < 6) {
+    // Sunrise gradient
+    gradientColors = "#4e6799 0%, #6096b3 50%, #e0c4af 100%";
+    skyElement.style.filter = 'blur(2px) opacity(50%)';
+  } else if (hour >= 7 && hour < 17) {
+    // Morning/afternoon gradient
+    gradientColors = "#4f9dff 0%, #a3ccff 50%, #5391dc 100%";
+    document.querySelector('.rainbow').style.visibility = 'visible'; // Show rainbow
+  } else if (hour >= 17 && hour < 19) {
+    // Sunset gradient
+    gradientColors = "#6096b3 0%, #4e6799 50%, #766fa1 100%";
+    skyElement.style.filter = 'blur(2px) opacity(50%)';
+  } else {
+    // Night gradient
+    gradientColors = "#131421 0%, #111724 50%, #070708 100%";
+    skyElement.style.filter = 'blur(5px) opacity(10%)';
+  }
+
+  // Apply gradient colors with transition effect
+  skyElement.style.transition = 'background-image 1s ease-in-out';
+  let newGradient = `radial-gradient(${gradientColors})`;
   
-    if (hour >= 5 && hour < 6) {
-      // Sunrise gradient
-      gradientColors = "#4e6799 0%, #6096b3 50%, #e0c4af 100%";
-      skyElement.style.filter = 'blur(2px) opacity(50%)';
-    } else if (hour >= 7 && hour < 17) {
-      // Morning/afternoon gradient
-      gradientColors = "#4f9dff 0%, #a3ccff 50%, #5391dc 100%";
-      skyElement.style.filter = 'blur(2px) opacity(50%)';
-    } else if (hour >= 17 && hour < 19) {
-      // Sunset gradient
-      gradientColors = "#6096b3 0%, #4e6799 50%, #766fa1 100%";
-      skyElement.style.filter = 'blur(2px) opacity(50%)';
-    } else {
-      // Night gradient
-      gradientColors = "#131421 0%, #111724 50%, #070708 100%";
-      skyElement.style.filter = 'blur(5px) opacity(10%)';
+  // Update the background gradient gradually
+  let steps = 20; // Adjust the number of steps for smoother transition
+  let currentStep = 0;
+  let interval = setInterval(function() {
+    currentStep++;
+    let percentage = (currentStep / steps) * 100;
+    let interpolatedGradient = `radial-gradient(${gradientColors}) ${percentage}% ${percentage}%`;
+    document.body.style.backgroundImage = `${currentGradient}, ${interpolatedGradient}`;
+    if (currentStep >= steps) {
+      clearInterval(interval);
+      document.body.style.backgroundImage = newGradient;
     }
-  
-    // Apply gradient colors with transition effect
-    skyElement.style.transition = 'background-image 1s ease-in-out';
-    document.body.style.backgroundImage = `radial-gradient(${gradientColors})`;
-  }  
+  }, 50); // Adjust the interval for smoother transition
+}
 
   setBackgroundGradient();
 
@@ -218,23 +233,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function typeWriter(textContent) {
     let i = 0;
-
+  
     // Play typewriter sound at the beginning of typing
     typewriterSound.currentTime = 0; // Reset audio to start position
     typewriterSound.play();
-
+  
     clearText(); // Ensure text is cleared before typing
 
-    function type() {
-      if (i < textContent.length) {
-        const char = textContent.charAt(i);
-        textElement.innerHTML += char; // Use innerHTML to render HTML tags
-        i++;
-        typingTimeout = setTimeout(type, typingSpeed);
-      }
+  let index = 0;
+
+  function type() {
+    if (index < textContent.length) {
+      textElement.innerHTML += textContent[index];
+      index++;
+      setTimeout(type, typingSpeed); // Call type() recursively after a delay
     }
-    type();
   }
+
+  type(); // Start the recursive typing process
+}
+  
 
   function clearText() {
     textElement.innerHTML = '';
