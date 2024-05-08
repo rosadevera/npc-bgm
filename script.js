@@ -87,19 +87,23 @@ function setBackgroundGradient() {
   if (hour >= 5 && hour < 6) {
     // Sunrise gradient
     gradientColors = "#4e6799 0%, #6096b3 50%, #e0c4af 100%";
-    skyElement.style.filter = 'blur(2px) opacity(50%)';
+    skyElement.style.filter = 'blur(2px) opacity(50%)'
+    document.querySelector('.rainbow').style.visibility = 'hidden';
   } else if (hour >= 7 && hour < 17) {
     // Morning/afternoon gradient
     gradientColors = "#4f9dff 0%, #a3ccff 50%, #5391dc 100%";
+    skyElement.style.filter = 'blur(0px) opacity(100%)';
     document.querySelector('.rainbow').style.visibility = 'visible'; // Show rainbow
   } else if (hour >= 17 && hour < 19) {
     // Sunset gradient
     gradientColors = "#6096b3 0%, #4e6799 50%, #766fa1 100%";
-    skyElement.style.filter = 'blur(2px) opacity(50%)';
+    skyElement.style.filter = 'blur(2px) opacity(50%)'
+    document.querySelector('.rainbow').style.visibility = 'hidden';
   } else {
     // Night gradient
     gradientColors = "#131421 0%, #111724 50%, #070708 100%";
-    skyElement.style.filter = 'blur(5px) opacity(10%)';
+    skyElement.style.filter = 'blur(5px) opacity(10%)'
+    document.querySelector('.rainbow').style.visibility = 'hidden';
   }
 
   // Apply gradient colors with transition effect
