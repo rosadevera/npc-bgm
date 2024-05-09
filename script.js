@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let gradientColors;
     let skyElement = document.querySelector('.sky');
 
-  if (hour >= 5 && hour < 6) {
+  if (hour >= 5 && hour < 7) {
     // Sunrise gradient
     gradientColors = "#4e6799 0%, #6096b3 50%, #e0c4af 100%";
     skyElement.style.filter = 'blur(2px) opacity(50%)';
